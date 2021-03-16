@@ -16,12 +16,25 @@
         <div class="menu" v-show="this.isMenuOpened">
           <div class="menu-inner">
             <ul>
-              <router-link tag="li" v-for="route in this.routes" :key="route.index" :to="route.path" @click.native="closeMenu">
-                <svg-icon
-                  :iconName="route.icon"
-                  :svgClass="`menu-item-icon`"
-                ></svg-icon
-                >{{route.name}}
+              <router-link
+                tag="li"
+                v-for="route in this.routes"
+                :key="route.index"
+                :to="route.path"
+                @click.native="closeMenu"
+                active-class="route-active"
+                exact
+              >
+                <template v-if="route.display">
+                  <div class="menu-item">
+                    <svg-icon
+                      :iconName="route.icon"
+                      :svgClass="`menu-item-icon`"
+                    >
+                    </svg-icon
+                    >{{ route.name }}
+                  </div>
+                </template>
               </router-link>
             </ul>
           </div>
@@ -31,14 +44,14 @@
         </div>
       </transition>
       <transition name="pop-mask-layer">
-        <div class="mask" v-show="this.isMenuOpened" @click="closeMenu">
-        </div>
+        <div class="mask" v-show="this.isMenuOpened" @click="closeMenu"></div>
       </transition>
     </nav>
   </header>
 </template>
 
 <script>
+import { setViewportHeight } from 'common/js/dom'
 export default {
   data() {
     return {
@@ -50,9 +63,11 @@ export default {
     closeMenu() {
       this.isMenuOpened = !this.isMenuOpened;
     },
-  },
-  created: function() {
-    console.log(this.routes)
+  }, 
+  mounted: function() {
+    this.$nextTick(() => {
+      setViewportHeight('.menu')
+    })
   }
 };
 </script>
@@ -60,6 +75,7 @@ export default {
 <style lang="scss" scoped>
 .nav {
   position: relative;
+  background-color: $color-theme-white;
   .container {
     .nav-bar {
       display: flex;
@@ -100,15 +116,19 @@ export default {
       ul {
         li {
           position: relative;
+          margin-bottom: 10px;
+          .menu-item {
+          position: relative;
           height: 20px;
           line-height: 20px;
           padding: 10px 0px 10px 60px;
-          margin-bottom: 10px;
           border: 1px solid $color-theme-white;
           border-radius: 6px;
           font-size: 15px;
           background-color: $color-theme-grey;
         }
+        }
+        
       }
     }
     .menu-switch {
@@ -131,9 +151,22 @@ export default {
     height: 100vh;
     z-index: 99;
     background-color: $color-theme-grey;
-    // opacity: 0.8;
   }
 }
+
+.route-active::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  width: 5px;
+  height: 100%;
+  margin-left: 1px;
+  background-color: $color-theme-blue;
+  border: 1px solid $color-theme-grey !important;
+  border-radius: 5px;
+}
+
 .pop-menu-enter,
 .pop-menu-leave-to {
   transform: translateX(-400px);
@@ -151,16 +184,16 @@ export default {
 
 .pop-mask-layer-enter,
 .pop-mask-layer-leave-to {
-  opacity: 0
+  opacity: 0;
 }
 
 .pop-mask-layer-enter-to,
 .pop-mask-layer-leave {
-  opacity: 0.8
+  opacity: 1;
 }
 
 .pop-mask-layer-enter-active,
 .pop-mask-layer-leave-active {
-  transition: all 1s ease;
+  transition: opacity 1s ease;
 }
 </style>

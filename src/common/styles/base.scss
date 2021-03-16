@@ -1,5 +1,10 @@
 @import './variable.scss';
 
+
+html {
+    background-color: $color-theme-grey;
+}
+
 .container {
     box-sizing: border-box;
     width: 100%;
@@ -7,3 +12,4 @@
     padding-right: 12px;
     margin: 0 auto;
 }
+ 

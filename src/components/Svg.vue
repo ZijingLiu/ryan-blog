@@ -46,7 +46,7 @@ export default {
 .menu-item-icon {
   display: inline-block;
   position: absolute;
-  top: 8px;
+  top: 9px;
   left: 12px;
   width: 20px;
   height: 20px;

@@ -10,32 +10,45 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    redirect: "/Home",
+    display: false
+    // name: 'Home',
+    // component: Home,
+    // icon: 'Home'
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home,
-    icon: 'Home'
+    icon: 'Home',
+    display: true
   },
   {
     path: '/movies',
     name: 'Movies',
     component: Movies,
-    icon: 'Movie'
+    icon: 'Movie',
+    display: true
   },
   {
     path: '/books',
     name: 'Books',
     component: Books,
-    icon: 'Book'
+    icon: 'Book',
+    display: true
   },
   {
     path: '/moments',
     name: 'Moments',
     component: Moments,
-    icon: 'Moment'
+    icon: 'Moment',
+    display: true
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  linkActiveClass: 'route-class'
 })
 
 export default router
