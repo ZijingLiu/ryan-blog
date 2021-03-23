@@ -1,27 +1,22 @@
 <template>
   <div class="home container" ref="home">
-    <!-- <div class="container"> -->
-      <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(item, index) in this.img" :key="index">
-          <a
-            :href="`${item.imgURL}`"
-            :style="`background-image: url(${item.imgURL})`"
-          ></a>
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
-      <div ref="contentWrapper"><content-list></content-list></div>
-    <!-- </div> -->
+    <swiper class="swiper" :options="swiperOption">
+      <swiper-slide v-for="(item, index) in this.img" :key="index">
+        <a
+          :href="`${item.imgURL}`"
+          :style="`background-image: url(${item.imgURL})`"
+        ></a>
+      </swiper-slide>
+      <div class="swiper-pagination" slot="pagination"></div>
+    </swiper>
+    <div ref="contentWrapper"><content-list></content-list></div>
   </div>
 </template>
 
 <script>
-// import BScroll from '@better-scroll/core'
-// import PullDown from '@better-scroll/pull-down'
-import { Swiper, SwiperSlide } from "vue-awesome-swiper"
-import "swiper/css/swiper.css"
-import ContentList from "../components/ContentList.vue"
-// BScroll.use(PullDown)
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
+import ContentList from "../components/ContentList.vue";
 
 export default {
   name: "Home",
@@ -34,7 +29,7 @@ export default {
         },
         autoplay: {
           delay: 2000,
-          // disableOnInteraction: false,
+          disableOnInteraction: false,
         },
       },
       img: [
@@ -58,14 +53,6 @@ export default {
     SwiperSlide,
     ContentList,
   },
-  // mounted: function() {
-  //   this.$nextTick(() => {
-  //     let contentWrapper = this.$refs.home
-  //     let Bs = new BScroll(contentWrapper,{
-  //       pullDownRefresh: true
-  //     })
-  //   })
-  // }
 };
 </script>
 

@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Movies from 'views/Movies'
 import Books from 'views/Books'
 import Moments from 'views/Moments'
+import NewBlog from 'views/NewBlog'
 
 Vue.use(VueRouter)
 
@@ -12,9 +13,6 @@ const routes = [
     path: '/',
     redirect: "/Home",
     display: false
-    // name: 'Home',
-    // component: Home,
-    // icon: 'Home'
   },
   {
     path: '/home',
@@ -44,6 +42,14 @@ const routes = [
     icon: 'Moment',
     display: true
   }
+  // ,
+  // {
+  //   path: '/newBlog',
+  //   name: 'NewBlog',
+  //   component: NewBlog,
+  //   icon: 'NewBlog',
+  //   display: true
+  // }
 ]
 
 const router = new VueRouter({
